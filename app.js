@@ -6,9 +6,11 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var connectDB = require("./config");
 var usersRouter = require("./routes/users");
+var blRouter = require("./routes/blRoutes");
+const reclamationRoutes = require("./routes/reclamationRoutes");
+const livraisonRoutes = require("./routes/livraisonRoutes");
 const cors = require("cors");
 var app = express();
-
 const allowedOrigins = [process.env.DNS];
 app.use(
   cors({
@@ -23,9 +25,10 @@ app.use(logger("dev"));
 app.use(express.json({ limit: "2gb" }));
 app.use(express.urlencoded({ limit: "2gb", extended: true }));
 app.use(cookieParser());
-
+app.use("/bl", blRouter);
 app.use("/users", usersRouter);
-
+app.use("/reclamation", reclamationRoutes);
+app.use("/livraison", livraisonRoutes);
 app.use(function (req, res, next) {
   next(createError(404));
 });

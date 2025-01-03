@@ -7,6 +7,7 @@ const {
   updateUser,
   deleteUser,
   getAllUsers,
+  toggleUserRole,
 } = require("../controllers/userController");
 
 router.post("/register", registerUser);
@@ -20,5 +21,7 @@ router.get("/", getAllUsers);
 router.put("/:id", updateUser);
 
 router.delete("/:id", deleteUser);
+
+router.put("/role/:id", toggleUserRole);
 
 module.exports = router;

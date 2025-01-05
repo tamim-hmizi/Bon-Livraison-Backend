@@ -1,4 +1,4 @@
-const Livraison = require('../models/Livraison'); // Adjust the path as needed
+const Livraison = require("../models/Livraison"); // Adjust the path as needed
 
 // Create a new livraison
 exports.createLivraison = async (req, res) => {
@@ -13,7 +13,7 @@ exports.createLivraison = async (req, res) => {
     res.status(201).json(savedLivraison);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Error creating livraison', error: err });
+    res.status(500).json({ message: "Error creating livraison", error: err });
   }
 };
 
@@ -24,7 +24,7 @@ exports.getAllLivraisons = async (req, res) => {
     res.status(200).json(livraisons);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Error fetching livraisons', error: err });
+    res.status(500).json({ message: "Error fetching livraisons", error: err });
   }
 };
 
@@ -33,26 +33,30 @@ exports.getLivraisonById = async (req, res) => {
   try {
     const livraison = await Livraison.findById(req.params.id);
     if (!livraison) {
-      return res.status(404).json({ message: 'Livraison not found' });
+      return res.status(404).json({ message: "Livraison not found" });
     }
     res.status(200).json(livraison);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Error fetching livraison', error: err });
+    res.status(500).json({ message: "Error fetching livraison", error: err });
   }
 };
 
 // Update a livraison
 exports.updateLivraison = async (req, res) => {
   try {
-    const livraison = await Livraison.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const livraison = await Livraison.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
     if (!livraison) {
-      return res.status(404).json({ message: 'Livraison not found' });
+      return res.status(404).json({ message: "Livraison not found" });
     }
     res.status(200).json(livraison);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Error updating livraison', error: err });
+    res.status(500).json({ message: "Error updating livraison", error: err });
   }
 };
 
@@ -61,11 +65,11 @@ exports.deleteLivraison = async (req, res) => {
   try {
     const livraison = await Livraison.findByIdAndDelete(req.params.id);
     if (!livraison) {
-      return res.status(404).json({ message: 'Livraison not found' });
+      return res.status(404).json({ message: "Livraison not found" });
     }
-    res.status(200).json({ message: 'Livraison deleted successfully' });
+    res.status(200).json({ message: "Livraison deleted successfully" });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Error deleting livraison', error: err });
+    res.status(500).json({ message: "Error deleting livraison", error: err });
   }
 };

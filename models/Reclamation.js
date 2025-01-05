@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const reclamationSchema = new mongoose.Schema({
-  type: String,
+  type: { type: String, enum: ["Etat", "Quantite"] },
   refArticle: String,
   poid: String,
   nombre: String,

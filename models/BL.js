@@ -11,6 +11,7 @@ const blSchema = new mongoose.Schema({
   etatDepot: { type: String, enum: ["Bon", "Mal"] },
   etatLivreur: { type: String, enum: ["Bon", "Mal"] },
   users: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  
 });
 
 module.exports = mongoose.model("BL", blSchema);

@@ -43,6 +43,32 @@ exports.getReclamationById = async (req, res) => {
   }
 };
 
+
+// Fetch reclamations for a specific BL
+exports.getReclamationsByBlId = async (req, res) => {
+  try {
+    // Get the BL ID from the request parameters
+    const blId = req.params.blId;
+    
+    // Find all reclamations where the 'blId' matches the provided ID
+    const reclamations = await Reclamation.find({ blId })
+      .populate('blId userId'); // Populate associated BL and User details
+
+    // If no reclamations are found for the given BL, return a 404 message
+    if (!reclamations || reclamations.length === 0) {
+      return res.status(404).json({ message: "No reclamations found for this BL" });
+    }
+
+    // Return the list of reclamations
+    res.status(200).json(reclamations);
+  } catch (err) {
+    // Catch and handle any errors during the database query
+    console.error(err);
+    res.status(500).json({ message: "Error fetching reclamations", error: err });
+  }
+};
+
+
 // Update a reclamation
 exports.updateReclamation = async (req, res) => {
   try {

@@ -7,6 +7,8 @@ exports.createLivraison = async (req, res) => {
       dateLivraisonClient: req.body.dateLivraisonClient,
       etatLivraison: req.body.etatLivraison,
       confirmation: req.body.confirmation,
+      blId: req.body.blId,
+      userId: req.body.userId,
     });
 
     const savedLivraison = await livraison.save();

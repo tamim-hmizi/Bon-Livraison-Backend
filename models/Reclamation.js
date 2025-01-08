@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const reclamationSchema = new mongoose.Schema({
   type: { type: String, enum: ["Etat", "Quantite"] },
@@ -7,10 +7,12 @@ const reclamationSchema = new mongoose.Schema({
   nombre: String,
   justification: String,
   etat: String,
-  depottraite: { depottraite: String, enum: ["Oui", "Non"] },
-  usinetraite: { usinetraite: String, enum: ["Oui", "Non"] },
+  depottraite: {  type: String, enum: ["Oui", "Non"], default: "Non"  },
+  usinetraite: {  type: String, enum: ["Oui", "Non"], default: "Non"  },
   blId: { type: mongoose.Schema.Types.ObjectId, ref: "BL" },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });
 
-module.exports = mongoose.model("Reclamation", reclamationSchema);
+const Reclamation = mongoose.model('Reclamation', reclamationSchema);
+
+module.exports = Reclamation;

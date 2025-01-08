@@ -53,7 +53,7 @@ exports.getReclamationsByBlId = async (req, res) => {
     // Find all reclamations where the 'blId' matches the provided ID
     const reclamations = await Reclamation.find({ blId })
       .populate('blId userId'); // Populate associated BL and User details
-
+    
     // If no reclamations are found for the given BL, return a 404 message
     if (!reclamations || reclamations.length === 0) {
       return res.status(404).json({ message: "No reclamations found for this BL" });
@@ -67,7 +67,6 @@ exports.getReclamationsByBlId = async (req, res) => {
     res.status(500).json({ message: "Error fetching reclamations", error: err });
   }
 };
-
 
 // Update a reclamation
 exports.updateReclamation = async (req, res) => {
@@ -86,7 +85,6 @@ exports.updateReclamation = async (req, res) => {
     res.status(500).json({ message: "Error updating reclamation", error: err });
   }
 };
-
 // Delete a reclamation
 exports.deleteReclamation = async (req, res) => {
   try {

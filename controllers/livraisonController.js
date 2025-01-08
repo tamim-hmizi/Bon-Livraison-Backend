@@ -75,3 +75,18 @@ exports.deleteLivraison = async (req, res) => {
     res.status(500).json({ message: "Error deleting livraison", error: err });
   }
 };
+
+
+// Get livraisons by BL ID
+exports.getLivraisonsByBlId = async (req, res) => {
+  try {
+    const livraisons = await Livraison.find({ blId: req.params.blId }).populate("userId", "name");
+    if (!livraisons.length) {
+      return res.status(404).json({ message: "No livraisons found for the given BL ID" });
+    }
+    res.status(200).json(livraisons);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Error fetching livraisons by BL ID", error: err });
+  }
+};
